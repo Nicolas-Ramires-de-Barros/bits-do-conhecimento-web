@@ -1,6 +1,6 @@
 <?php
-   require_once("banco.php");
-   require_once("tabelas.php");
+   require_once("../banco/banco.php");
+   require_once("../banco/tabelas.php");
 
     $curso_futuro = db_curso_futuro_select();
     $genero = db_genero_select();

@@ -32,10 +32,10 @@
 
     </div>
     <div class="botaoEscolhaRegistro">
-        <a href="login.php"><button>ALUNO</button></a>
+        <a href="cadastroAluno.php"><button>ALUNO</button></a>
     </div>
     <div class="botaoEscolhaRegistro">
-        <a href="login.php"><button>CONTRIBUIDOR</button></a>
+        <a href="cadastroProfe.php"><button>CONTRIBUIDOR</button></a>
     </div>
 </body>
 <footer>

@@ -1,5 +1,5 @@
 <?php
-   require_once("PHP.php");
+    require_once("fazedor.php")
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="fashion.css">
-    <script src="programa.js"></script>
+   
 </head>
 <body>
     <div classe="caixinha">
@@ -32,8 +32,8 @@
         </Div>
         <div class="corpo">
             <h3><?=$mensagem?></h3>
-
-            <form method="GET">
+            <div class="t">
+                <form method="GET">
                 <label for="nome">Nome</label><br>
                     <input class="textos" type="text" name="nome" required id="nome" value="<?=$nome?>"><br><br>
                 <label for="email">Email</label><br>
@@ -42,27 +42,31 @@
                     <input class="textos" type="password" name="senha" required id="senha" value="<?=$senha?>"><br></br>
                 <label for="senha2">Comfirme a senha</label><br>
                     <input class="textos" type="password" name="senha2" required id="senha2" value="<?=$senha2?>"><br></br>
-                <fieldset>
-                    <legend>Cursos que deseja ver no futuro</legend>
-                    <?php
-                        echo checkbox("cursofutu", $curso_futuro, $curfutu_selec);
-                    ?>
-                </fieldset>
-                <fieldset>
-                    <legend>Genero</legend>
-                    <?php
-                        echo radio("genero", $genero);
-                    ?>
-                </fieldset>
+            </div>
+                    
+    
+
+
+                    <div class="marcas">
+                        <legend>Qual sua formação</legend><br>
+                        <?php
+                            echo select("Formação: ", "formação", $formacao, "","", "gavetan");
+                        ?>
+                        <legend>Cursos que deseja ver no futuro</legend><br>
+                        <?php
+                            echo checkbox("cursofutu", $curso_futuro, $curfutu_selec, "selecao", "caixan");
+                        ?>
+                        <br></br>
+                    
+                        <legend>Genero</legend>
+                        <?php
+                            echo radio("genero", $genero, "selecao", "circulon");
+                        ?>
+                        
+                    </div>
+
                 <br><br>
-                <?php
-                    echo select("Formação: ", "formação", $formacao, "","");
-                ?>
-
-
-
-                <br><br>
-                <input type="submit" value="Enviar">
+                <input class="subbotao" type="submit" value="Enviar" style="font-size: 25px;">
             </form>
         </div>
         <Div class="barraInferior">
@@ -74,12 +78,12 @@
             © Bits do conhecimento
             </div>
             <div>
-            Todos os direitos reservados <br/> a Nícolas Ramires
+                Nícolas Ramires
             </div> 
         </Div>
     </Div>
 </body>
 <footer>
-
+    <script src="programa.js"></script>
 </footer>
 </html>

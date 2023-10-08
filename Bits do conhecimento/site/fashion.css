@@ -32,7 +32,7 @@ body {
     display: flex; 
     justify-content: space-between;
     align-items: center;
-    margin-top: none;
+    margin-top: 10px;
     z-index: 1000;
     bottom: 0;
     left: 0;
@@ -47,6 +47,10 @@ body {
 .escolharegisto{
     align-items: center;
     background-color: #402A49;
+}
+body{
+    background-color: #402A49;
+    color: #fff;
 }
 
 .nomeSite{
@@ -199,9 +203,33 @@ body {
     color: white;
 }
 
+.subbotao {
+    background-color: white;
+    border: none;
+    color: #b3972b;
+    font-size: 30px;
+    text-align: center;
+    font-size: 1rem;
+    margin: 1% 1%;
+    transition: 0.3s;
+    border-radius: 12px;
+    width: 25%;
+    height: 3.5em;
+}
+
+
+
+.subbotao:hover {
+    background-color: #FFD700;
+    color: white;
+}
+
 .corpo{
     margin-top: 70px;
     flex-grow: 1;
+    margin-bottom: 70px;
+    font-size: 150%;
+    align-content: center;
 }
 
 .caixinha{
@@ -222,6 +250,10 @@ body {
     text-align: center;
 }*/
 
+.t{
+    font-size: 100%;
+}
+
 .textos{
     width: 25%;
     padding: 15px;
@@ -230,6 +262,17 @@ body {
     justify-content: center;
     align-items: center;
     border: none;
+    font-size: 100%;
+}
+
+.marcas{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0 auto;
+    
 }
 
 .corpo form{
@@ -237,3 +280,154 @@ body {
     align-items: center;
     text-align: center;
 }
+
+.selecao {
+    display: inline-block;
+    position: relative;
+    padding-left: 60px; 
+    cursor: pointer;
+}
+.selecao input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.caixan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 25px;
+    height: 35px; /* Ajuste a altura conforme necessário */
+    width: 35px; /* Ajuste a largura conforme necessário */
+    background-color: #ffffff;
+    border: 1px solid #000000; /* Adicione uma borda para a caixa de seleção */
+}
+.selecao input:checked ~ .caixan {
+    background-color: #FFD700;
+    border: 1px solid  #FFD700; /* Altere a cor da borda quando selecionado */
+}
+
+.caixan:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+.selecao input:checked ~ .caixan:after {
+    display: block;
+  }
+
+  .selecao .caixan:after {
+    left: 9px; /* Posição do marcador dentro do checkbox */
+    top: 5px; /* Posição do marcador dentro do checkbox */
+    width: 5px; /* Tamanho do marcador */
+    height: 10px; /* Tamanho do marcador */
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
+
+  .circulon {
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 35px; /* Ajuste a altura conforme necessário */
+    width: 35px; /* Ajuste a largura conforme necessário */
+    background-color: #ffffff;
+    border: 1px solid #000000; /* Adicione uma borda para a caixa de seleção */
+}
+.selecao input:checked ~ .circulon {
+    background-color: #FFD700;
+    border: 1px solid #FFD700; /* Altere a cor da borda quando selecionado */
+}
+
+.circulon:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+.selecao input:checked ~ .circulon:after {
+    display: block;
+  }
+
+  .selecao .circulon:after {
+    left: 9px; /* Posição do marcador dentro do checkbox */
+    top: 5px; /* Posição do marcador dentro do checkbox */
+    width: 5px; /* Tamanho do marcador */
+    height: 10px; /* Tamanho do marcador */
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    border-radius: 50%;
+  }
+
+.gavetan{
+    position: relative;
+    font-family: Arial;
+    z-index: 1000;
+    margin-bottom: 50px;
+    width: 100%;
+
+}
+
+.gavetan select{
+    display: none;
+}
+
+.gavetanick{
+    background-color: #FFD700;
+}
+
+.gavetanick:after{
+    position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.gavetan.select-arrow-active:after{
+    border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+/*.select-items div,.select-selected*/
+.itensseleci div,.gavetanick {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+.itensseleci {
+    position: absolute;
+    background-color: #FFD700;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    max-height: 200px;
+    overflow-y: auto;
+}
+  
+.gaveta-fechada {
+    display: none;
+}
+
+.itensseleci div:hover, .mesmaseles {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+
+/*------------------------------------------------------------------------------*/
+

@@ -65,8 +65,10 @@
                         
                     </div>
 
-                <br><br>
-                <input class="subbotao" type="submit" value="Enviar" style="font-size: 25px;">
+                
+                <div class="botao-submit">
+                    <input class="subbotao" type="submit" value="Enviar">
+                </div>
             </form>
         </div>
         <Div class="barraInferior">

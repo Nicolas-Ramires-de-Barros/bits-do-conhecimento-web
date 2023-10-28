@@ -202,6 +202,12 @@ body{
     background-color: #FFD700;
     color: white;
 }
+.botao-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh; /* Ajuste a altura conforme necessário para centralizar verticalmente */
+}
 
 .subbotao {
     background-color: white;

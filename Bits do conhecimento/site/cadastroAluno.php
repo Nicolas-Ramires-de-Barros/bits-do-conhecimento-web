@@ -50,14 +50,16 @@
                     <div class="marcas">
                         <legend>Qual sua formação</legend><br>
                         <?php
-                            echo select("Formação: ", "formação", $formacao, "","", "gavetan");
+                            echo select("formação", $formacao, "","", "gavetan");
                         ?>
                         <legend>Cursos que deseja ver no futuro</legend><br>
                         <?php
                             echo checkbox("cursofutu", $curso_futuro, $curfutu_selec, "selecao", "caixan");
                         ?>
-                        <br></br>
-                    
+                        <legend>Qual sua etinia</legend>
+                        <?php
+                            echo select("etinia", $etinia, "", "", "gavetan");
+                        ?>
                         <legend>Genero</legend>
                         <?php
                             echo radio("genero", $genero, "selecao", "circulon");

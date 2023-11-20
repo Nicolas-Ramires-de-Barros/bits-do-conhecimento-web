@@ -1,7 +1,7 @@
 <?php
 function db_curso_futuro_select(){
     global $conn;
-    $sth = $conn->prepare("select id_curso_futuro, nm_curso_futuro from tb_curso_futuro;"); // MUDA PARA O SELECT QUE VOQUE QUER
+    $sth = $conn->prepare("select id_curso, nm_curso from tb_curso where fl_curso_ativo = false;"); 
     $sth->execute() ;
     return $sth->fetchAll();
 
@@ -23,7 +23,15 @@ function db_formacao_select(){
 
 function db_formacao_colaborador_select(){
     global $conn;
-    $hola = $conn->prepare("select * from tb_formacao where id_formacao in (5,6,7,8,9,10,11,12) order by id_formacao asc;");
+    $hola = $conn->prepare("select * from tb_formacao where id_formacao not in (1,2,3,4) order by id_formacao asc;");
+    $hola->execute();
+    return $hola->fetchAll();
+
+}
+
+function db_etinia_select(){
+    global $conn;
+    $hola = $conn->prepare("select id_etinia, nm_etinia from tb_etinia;");
     $hola->execute();
     return $hola->fetchAll();
 }

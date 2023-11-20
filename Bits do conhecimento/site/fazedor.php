@@ -5,6 +5,7 @@ require_once("../banco/tabelas.php");
 $curso_futuro = db_curso_futuro_select();
 $genero = db_genero_select();
 $formacao = db_formacao_select();
+$etinia = db_etinia_select();
 
 
 $nome = (isset($_GET['nome']) ? $_GET['nome'] : "");
@@ -87,7 +88,7 @@ function radio($nome, $info, $classe, $Ncir){
     return $html;
 }
  
-function select($nomeN, $nome, $info, $tamanho, $varios, $classe) {
+function select($nome, $info, $tamanho, $varios, $classe) {
     $html="";
     $html .= "<div class=\"${classe}\">";
     $html .= "<label for=\"". $nome ."\"></label>\n";

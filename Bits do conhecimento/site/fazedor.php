@@ -8,11 +8,9 @@ $formacao = db_formacao_select();
 $etinia = db_etinia_select();
 
 
-$nome = (isset($_GET['nome']) ? $_GET['nome'] : "");
-$email = (isset($_GET['email']) ? $_GET['email'] : "");
-$senha = (isset($_GET['senha']) ? $_GET['senha'] : "");
-$senha2 = (isset($_GET['senha2']) ? $_GET['senha2'] : "");
-$curfutu_selec = (isset($_GET['cursofutu']) ? $_GET['cursofutu'] : array());
+$senha2 = (isset($_POST['senha2']) ? $_POST['senha2'] : "");
+$curfutu_selec = (isset($_POST['cursofutu']) ? $_POST['cursofutu'] : array());
+
 
  /*$cursos_desejados = array(
      array(1,"Game maker"),
@@ -40,15 +38,6 @@ $curfutu_selec = (isset($_GET['cursofutu']) ? $_GET['cursofutu'] : array());
 
 $mensagem = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if ($senha === $senha2) {
-        
-        $mensagem = "";
-         
-    } else {
-        $mensagem = "As senhas não coincidem. Por favor, digite as senhas novamente.";
-    }
-}
 
 function checkbox($nome, $info, $selecionados, $classe, $Nbox){
     $html="";
@@ -109,3 +98,22 @@ function select($nome, $info, $tamanho, $varios, $classe) {
     return $html;
 }
 
+function db_pessoa_insert($nome, $nomeU, $email, $senha, $genero, $etinia, $formacao, $cargo) {
+    global $conn;
+
+    $sth = $conn->prepare("
+        INSERT INTO tb_pessoa (nm_pessoa, nm_usuario, email_pessoa, nu_senha, id_genero, id_etinia, id_formacao, id_cargo)
+        VALUES (:nome, :nomeU, :email, :senha, :genero, :etinia, :formacao, :cargo)
+    ");
+
+    $sth->bindParam(':nome', $nome);
+    $sth->bindParam(':nomeU', $nomeU);
+    $sth->bindParam(':email', $email);
+    $sth->bindParam(':senha', $senha);
+    $sth->bindParam(':genero', $genero);
+    $sth->bindParam(':etinia', $etinia);
+    $sth->bindParam(':formacao', $formacao);
+    $sth->bindParam(':cargo', $cargo);
+
+    return $sth->execute();
+}

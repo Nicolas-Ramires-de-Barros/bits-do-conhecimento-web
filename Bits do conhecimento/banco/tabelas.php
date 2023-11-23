@@ -35,3 +35,4 @@ function db_etinia_select(){
     $hola->execute();
     return $hola->fetchAll();
 }
+

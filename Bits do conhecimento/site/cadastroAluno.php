@@ -1,30 +1,30 @@
 <?php
-    require_once("fazedor.php");
-    $nomep = (isset($_POST['nome']) ? $_POST['nome'] : "");
-    $nomeUp = (isset($_POST['nomeU']) ? $_POST['nome'] : "");
-    $emailp = (isset($_POST['email']) ? $_POST['email'] : "");
-    $senhap = (isset($_POST['senha']) ? $_POST['senha'] : "");
-    $generop = (isset($_POST['genero']) ? $_POST['genero'] : null);
-    $generop = key($generop);
-    $etiniap = (isset($_POST['etinia']) ? $_POST['etinia'][0] : null);
-    $formacaop = (isset($_POST['formacao']) ? $_POST['formacao'][0] : null);
-    
-    
-    $mensagem = "";
-    
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if ($senhap === $senha2) {
-            // Insere na tabela tb_pessoa
-            if (db_pessoa_insert($nomep, $nomeUp, $emailp, $senhap, $generop, $etiniap, $formacaop, 1)) {
-                $mensagem = "Registro bem-sucedido!";
-            } else {
-                $mensagem = "Erro ao registrar. Por favor, tente novamente.";
-            }
+require_once("fazedor.php");
+
+$nomep = (isset($_POST['nome']) ? $_POST['nome'] : "");
+$nomeUp = (isset($_POST['nomeU']) ? $_POST['nomeU'] : "");
+$emailp = (isset($_POST['email']) ? $_POST['email'] : "");
+$senhap = (isset($_POST['senha']) ? $_POST['senha'] : "");
+$senha2 = (isset($_POST['senha2']) ? $_POST['senha2'] : "");  // Adicionado este campo
+$generop = (isset($_POST['genero']) ? $_POST['genero'] : null);
+$etiniap = (isset($_POST['etinia']) ? $_POST['etinia'][0] : null);
+$formacaop = (isset($_POST['formacao']) ? $_POST['formacao'][0] : null);
+
+$mensagem = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($senhap === $senha2) {
+        // Insere na tabela tb_pessoa
+        if (db_pessoa_insert($nomep, $nomeUp, $emailp, $senhap, $generop, $etiniap, $formacaop, 1, $cursosDesejados)) {
+            $mensagem = "Registro bem-sucedido!";
+            header("Location: home.php");
         } else {
-            $mensagem = "As senhas não coincidem. Por favor, digite as senhas novamente.";
+            $mensagem = "Erro ao registrar. Por favor, tente novamente.";
         }
+    } else {
+        $mensagem = "As senhas não coincidem. Por favor, digite as senhas novamente.";
     }
-    
+}
 ?>
 
 <!DOCTYPE html>

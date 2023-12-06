@@ -98,22 +98,108 @@ function select($nome, $info, $tamanho, $varios, $classe) {
     return $html;
 }
 
-function db_pessoa_insert($nome, $nomeU, $email, $senha, $genero, $etinia, $formacao, $cargo) {
+// No arquivo fazedor.php, dentro da função db_pessoa_insert
+function db_pessoa_insert($nome, $nomeU, $email, $senha, $genero, $etinia, $formacao, $cargo, $cursosDesejados) {
     global $conn;
+
+    // Verifica se $genero é um array e pega o primeiro elemento
+    $genero = is_array($genero) ? $genero[0] : $genero;
+
+    // Recupera o ID do gênero a partir do nome do gênero
+    $idGenero = db_genero_id_por_nome($genero);
+
+    // Verifica se $etinia é um array e pega o primeiro elemento
+    $etinia = is_array($etinia) ? $etinia[0] : $etinia;
+
+    // Recupera o ID da etnia a partir do nome da etnia
+    $idEtnia = db_etinia_id_por_nome($etinia);
+
+    // Recupera o ID da formação a partir do nome da formação
+    $idFormacao = db_formacao_id_por_nome($formacao);
 
     $sth = $conn->prepare("
         INSERT INTO tb_pessoa (nm_pessoa, nm_usuario, email_pessoa, nu_senha, id_genero, id_etinia, id_formacao, id_cargo)
-        VALUES (:nome, :nomeU, :email, :senha, :genero, :etinia, :formacao, :cargo)
+        VALUES (:nome, :nomeU, :email, :senha, :idGenero, :idEtnia, :idFormacao, :cargo)
     ");
 
     $sth->bindParam(':nome', $nome);
     $sth->bindParam(':nomeU', $nomeU);
     $sth->bindParam(':email', $email);
     $sth->bindParam(':senha', $senha);
-    $sth->bindParam(':genero', $genero);
-    $sth->bindParam(':etinia', $etinia);
-    $sth->bindParam(':formacao', $formacao);
+    $sth->bindParam(':idGenero', $idGenero, PDO::PARAM_INT);  // Utiliza o ID do gênero
+    $sth->bindParam(':idEtnia', $idEtnia, PDO::PARAM_INT);  // Utiliza o ID da etnia
+    $sth->bindParam(':idFormacao', $idFormacao, PDO::PARAM_INT);  // Utiliza o ID da formação
     $sth->bindParam(':cargo', $cargo);
 
     return $sth->execute();
+    $idPessoa = $conn->lastInsertId();
+    db_curso_interece_insert($idPessoa, $cursosDesejados);
+    return true;
+}
+
+function db_curso_interece_insert($idPessoa, $cursosDesejados) {
+    global $conn;
+
+    foreach ($cursosDesejados as $idCurso) {
+        $sth = $conn->prepare("
+            INSERT INTO tb_curso_interece (id_curso, id_aluno)
+            VALUES (:idCurso, :idPessoa)
+        ");
+
+        $sth->bindParam(':idCurso', $idCurso);
+        $sth->bindParam(':idPessoa', $idPessoa);
+
+        $sth->execute();
+    }
+}
+
+// Adicione as seguintes funções para obter o ID da etnia e da formação a partir do nome
+function db_etinia_id_por_nome($nomeEtnia) {
+    global $conn;
+
+    $sth = $conn->prepare("SELECT id_etinia FROM tb_etinia WHERE nm_etinia = :nomeEtnia");
+    $sth->bindParam(':nomeEtnia', $nomeEtnia);
+    $sth->execute();
+
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? $result['id_etinia'] : null;
+}
+
+function db_formacao_id_por_nome($nomeFormacao) {
+    global $conn;
+
+    $sth = $conn->prepare("SELECT id_formacao FROM tb_formacao WHERE nm_formacao = :nomeFormacao");
+    $sth->bindParam(':nomeFormacao', $nomeFormacao);
+    $sth->execute();
+
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? $result['id_formacao'] : null;
+}
+
+
+// Adicione a seguinte função para obter o ID do gênero a partir do nome
+function db_genero_id_por_nome($nomeGenero) {
+    global $conn;
+
+    $sth = $conn->prepare("SELECT id_genero FROM tb_genero WHERE nm_genero = :nomeGenero");
+    $sth->bindParam(':nomeGenero', $nomeGenero);
+    $sth->execute();
+
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? $result['id_genero'] : null;
+}
+
+function db_curso_id_por_nome($nomeCurso) {
+    global $conn;
+
+    $sth = $conn->prepare("SELECT id_curso FROM tb_curso WHERE nm_curso = :nomeCurso");
+    $sth->bindParam(':nomeCurso', $nomeCurso);
+    $sth->execute();
+
+    $result = $sth->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? $result['id_curso'] : null;
 }

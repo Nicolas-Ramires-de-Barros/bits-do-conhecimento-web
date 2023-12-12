@@ -1,4 +1,7 @@
-
+<?php
+session_start();
+$_SESSION['nm_usuario'] = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

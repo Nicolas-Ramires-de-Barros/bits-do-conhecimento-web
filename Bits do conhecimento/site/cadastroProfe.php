@@ -14,7 +14,7 @@ $mensagem = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($senhap === $senha2) {
         
-        if (db_pessoa_insert($nomep, $nomeUp, $emailp, $senhap, $generop, $etiniap, 1)){
+        if (db_pessoa_insert($nomep, $nomeUp, $emailp, $senhap, $generop, $etiniap, 2)){
 
             $mensagem = "Registro bem-sucedido!";
             header("Location: home.php");

@@ -36,3 +36,24 @@ function db_etinia_select(){
     return $hola->fetchAll();
 }
 
+function db_id_curso_select($nm_curso) {
+
+    global $conn;
+
+    $sth = $conn->prepare("SELECT id_curso FROM tb_curso WHERE nm_curso = :nm_curso");
+
+    $sth->bindParam(':nm_curso', $nm_curso);
+    $sth->execute();
+
+    $result = $sth->fetch();
+    return $result['id_curso'];
+}
+
+
+function db_id_pessoa_select($nm_us){
+    global $conn;
+    $hola = $conn->prepare("select id_pessoa from tb_pessoa where nm_usuario = :nm_us ;");
+    $sth->bindParam(':nm_us', $nm_us);
+    $hola->execute();
+    return $hola->fetchAll();
+}
